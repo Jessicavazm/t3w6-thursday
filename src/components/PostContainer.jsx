@@ -21,11 +21,18 @@ export default class PostContainer extends Component {
     }
 
     toggleEditMode = () => {
-        this.setState(
-            {
+        this.setState({
             isEditing: !this.state.isEditing
-            }
-        )
+            })
+    }
+
+    updatePostData = (newAuthor, newLocation, newContent) => {
+        this.setState({
+                author: newAuthor,
+                lastUpdated: Date.now(),
+                location: newLocation,
+                content: newContent
+            })
     }
 
     // Render to return JSX component
@@ -42,6 +49,9 @@ export default class PostContainer extends Component {
                             location={this.state.location}
                             content={this.state.content}
                             lastUpdated={this.state.lastUpdated}
+
+                            // Passing the function as a prop
+                            updateData={this.updatePostData}
 
                             // Could pass the entire state in one go
                             parentState={this.state}
